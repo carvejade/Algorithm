@@ -2,20 +2,22 @@ import java.util.*;
 
 class Solution {
     boolean solution(String s) {
-        boolean answer = true;
-        if(s.length()%2 == 1)answer = false; 
+        if (s.length() % 2 == 1) return false; 
         
-        int cnt = 0; //스택 안써도
-        for(int i =0; i < s.length(); i++){
-            char c = s.charAt(i);
-            if( c == '('){
-                cnt++;
-            }else{
-                if(cnt == 0) return false;
-                cnt--;
-            }            
+        Stack<Character> bra = new Stack<>();
+        
+        // 문자열을 char 배열로 바꾸어 반복문 돌리기
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                bra.push(c); 
+            } else { 
+                if (bra.isEmpty()) { 
+                    return false;
+                }
+                bra.pop(); 
+            }
         }
         
-        return cnt == 0;
+        return bra.isEmpty();
     }
 }
